@@ -1,14 +1,16 @@
-import FadeInWhenVisible from "../FadeInWhenVisible/FadeInWhenVisible";
+import Visible from "../Visible/Visible";
 import before from "./assets/before.png";
 import service1 from "./assets/service1.jpg";
 import service2 from "./assets/service2.jpg";
 import service3 from "./assets/service3.jpg";
 import { FaRegUserCircle, FaBed, FaWifi } from "react-icons/fa";
 import { PiBathtub } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 export default function Services() {
+  const navigate = useNavigate();
   return (
-    <FadeInWhenVisible
+    <Visible
       direction="up"
       duration={700}
       delay={1}
@@ -25,10 +27,11 @@ export default function Services() {
         Book your stay and relax in luxury
       </h2>
       <div className="flex justify-center items-center gap-12">
-        <FadeInWhenVisible
+        <Visible
           direction="up"
           delay={100}
           className="w-96 bg-white cursor-pointer dark:bg-darkChocolate"
+          onClick={() => navigate("/rooms")}
         >
           <div className=" overflow-hidden h-80 ">
             <img src={service1} alt="service1" className="hover:scale-125" />
@@ -51,7 +54,7 @@ export default function Services() {
               </ul>
               <ul className="flex flex-col gap-4">
                 <li className="flex items-center  gap-2">
-                  <PiBathtub className="text-coffee text-2xl" />
+                  <PiBathtub className="text-coffee text-2xl none" />
                   <p>Bathtub</p>
                 </li>
                 <li className="flex items-center  gap-2">
@@ -61,11 +64,12 @@ export default function Services() {
               </ul>
             </div>
           </div>
-        </FadeInWhenVisible>
-        <FadeInWhenVisible
+        </Visible>
+        <Visible
           direction="up"
           delay={300}
           className="w-96 bg-white cursor-pointer dark:bg-darkChocolate"
+          onClick={() => navigate("/rooms")}
         >
           <div className=" overflow-hidden h-80 ">
             <img src={service2} alt="service1" className="hover:scale-125" />
@@ -98,11 +102,12 @@ export default function Services() {
               </ul>
             </div>
           </div>
-        </FadeInWhenVisible>
-        <FadeInWhenVisible
+        </Visible>
+        <Visible
           direction="up"
           delay={600}
           className="w-96 bg-white cursor-pointer dark:bg-darkChocolate"
+          onClick={() => navigate("/rooms")}
         >
           <div className=" overflow-hidden h-80 ">
             <img src={service3} alt="service1" className="hover:scale-125" />
@@ -135,8 +140,8 @@ export default function Services() {
               </ul>
             </div>
           </div>
-        </FadeInWhenVisible>
+        </Visible>
       </div>
-    </FadeInWhenVisible>
+    </Visible>
   );
 }

@@ -1,12 +1,11 @@
-import FadeInWhenVisible from "../FadeInWhenVisible/FadeInWhenVisible";
+import Visible from "../Visible/Visible";
 import before from "./assets/before.png";
 import service1 from "./assets/service1.jpg";
 import service2 from "./assets/service2.jpg";
 import service3 from "./assets/service3.jpg";
-
 export default function Offer() {
   return (
-    <FadeInWhenVisible
+    <Visible
       direction="left"
       delay={1}
       className=" pt-44 bg-white dark:bg-darkChocolate w-full"
@@ -20,8 +19,8 @@ export default function Offer() {
       </div>
       <h2 className="text-4xl text-center m-12">Get Our Special Offer.</h2>
       <div className="flex justify-center items-center gap-9">
-        <FadeInWhenVisible direction="up" delay={100}>
-          <div className=" overflow-hidden hover:overflow-hidden overflow-x-hidden">
+        <Visible direction="up" delay={100}>
+          <div className=" overflow-hidden hover:overflow-hidden overflow-x-hidden" >
             <div
               className="w-72 h-96  hover:scale-150 flex justify-start items-center"
               style={{ backgroundImage: `url(${service1})` }}
@@ -30,8 +29,8 @@ export default function Offer() {
               Family Discount
             </div>
           </div>
-        </FadeInWhenVisible>
-        <FadeInWhenVisible direction="up" delay={300}>
+        </Visible>
+        <Visible direction="up" delay={300}>
           <div className=" overflow-hidden hover:overflow-hidden overflow-x-hidden">
             <div
               className="w-72 h-96  hover:scale-150 flex justify-start items-center"
@@ -41,8 +40,8 @@ export default function Offer() {
               Couples offer
             </div>
           </div>
-        </FadeInWhenVisible>
-        <FadeInWhenVisible direction="up" delay={500}>
+        </Visible>
+        <Visible direction="up" delay={500}>
           <div className=" overflow-hidden hover:overflow-hidden overflow-x-hidden">
             <div
               className="w-72 h-96  hover:scale-150 flex justify-start items-center"
@@ -52,8 +51,8 @@ export default function Offer() {
               Buy Onc Get Onc Free
             </div>
           </div>
-        </FadeInWhenVisible>
+        </Visible>
       </div>
-    </FadeInWhenVisible>
+    </Visible>
   );
 }

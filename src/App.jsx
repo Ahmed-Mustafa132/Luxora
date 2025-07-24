@@ -4,13 +4,15 @@ import { ThemeProvider } from "./context/ThemeContext.jsx";
 import Navbar from "./components/navbar/navbar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import Rooms from "./pages/RoomsAndSuits/Rooms.jsx"
+import RoomsAndSuits from "./pages/RoomsAndSuits/RoomsAndSuits.jsx";
 
 function Layout() {
   return (
     <>
       <Navbar />
       <Outlet />
-      <Footer/>
+      <Footer />
     </>
   );
 }
@@ -21,9 +23,9 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "*", element: <NotFound  /> },
-
-
+      { path: "*", element: <NotFound /> },
+      { path: "/rooms", element: <Rooms /> },
+      {path:"/roomsAndSuits",element:<RoomsAndSuits/>}
       // يمكنك إضافة صفحات أخرى هنا
     ],
   },

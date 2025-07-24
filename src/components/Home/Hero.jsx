@@ -1,4 +1,4 @@
-import FadeInWhenVisible from "../FadeInWhenVisible/FadeInWhenVisible";
+import Visible from "../Visible/Visible";
 import { FaStar } from "react-icons/fa";
 import banner1 from "./assets/banner1.jpg";
 import banner2 from "./assets/banner2.png";
@@ -7,7 +7,7 @@ import shapeLine1 from "./assets/shape-line1.png";
 export default function Hero() {
   return (
     <>
-      <FadeInWhenVisible direction="right" duration={700} delay={1}>
+      <Visible direction="right" duration={700} delay={1}>
         {/* Parent container */}
         <div className="relative w-full h-screen overflow-hidden">
           {/* Background image + dark overlay */}
@@ -24,7 +24,7 @@ export default function Hero() {
 
           {/* Content on top */}
           <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 lg:px-8">
-            <FadeInWhenVisible
+            <Visible
               direction="left"
               duration={700}
               delay={300}
@@ -48,13 +48,13 @@ export default function Hero() {
 
                 {/* Stars shrink on mobile */}
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <FadeInWhenVisible direction="up" delay={i * 200}>
+                  <Visible direction="up" delay={i * 200}>
 
                   <FaStar
                     key={i}
                     className="text-yellow-400 text-2xl sm:text-4xl md:text-6xl"
                     />
-                    </FadeInWhenVisible>
+                    </Visible>
                 ))}
               </div>
 
@@ -64,11 +64,11 @@ export default function Hero() {
               <h1 className="font-bold text-3xl sm:text-4xl md:text-6xl text-white text-center">
                 with hotelier
               </h1>
-            </FadeInWhenVisible>
+            </Visible>
           </div>
         </div>
-      </FadeInWhenVisible>
-      <FadeInWhenVisible
+      </Visible>
+      <Visible
         direction="up"
         duration={700}
         delay={300}
@@ -104,7 +104,7 @@ export default function Hero() {
         <div className="bg-black text-white h-full w-1/4 text-2xl text-center flex justify-center  items-center hover:bg-coffee">
           CHECK <br /> AVAILABILITY
         </div>
-      </FadeInWhenVisible>
+      </Visible>
     </>
   );
 }

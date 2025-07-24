@@ -1,4 +1,4 @@
-import FadeInWhenVisible from "../FadeInWhenVisible/FadeInWhenVisible";
+import Visible from "../Visible/Visible";
 import before from "./assets/before.png";
 import about1 from "./assets/about1.jpg";
 import about2 from "./assets/about2.jpg";
@@ -11,7 +11,7 @@ export default function about() {
       className="flex justify-between items-center bg-no-repeat bg-right-bottom pt-12 px-20 dark:bg-darkChocolate"
       style={{ backgroundImage: `url(${Home})` }}
     >
-      <FadeInWhenVisible
+      <Visible
         direction="right"
         delay={100}
         className="flex justify-between items-start flex-col gap-9 max-w-xl"
@@ -58,8 +58,8 @@ export default function about() {
           </li>
         </ul>
         <button className="p-6 bg-coffee text-white hover:bg-black">DISCOVER MORE</button>
-      </FadeInWhenVisible>
-      <FadeInWhenVisible
+      </Visible>
+      <Visible
         direction="left"
         delay={100}
         className="before:container  before:w-full  before:h-80  before:block before:absolute before:border before:border-so before:border-coffee  before:-translate-x-14  before:translate-y-28 "
@@ -76,7 +76,7 @@ export default function about() {
           className=" -translate-x-36 -translate-y-36  "
           style={{ border: "15px solid #eeeeee" }}
         />
-      </FadeInWhenVisible>
+      </Visible>
     </div>
   );
 }

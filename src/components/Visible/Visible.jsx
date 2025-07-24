@@ -1,6 +1,6 @@
 import { useInView } from "react-intersection-observer";
 
-export default function FadeInWhenVisible({
+export default function Visible({
   children,
   direction = "up",
   threshold = 0.15,

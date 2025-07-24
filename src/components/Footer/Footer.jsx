@@ -1,9 +1,19 @@
-import { FaFacebookF, FaInstagram, FaLinkedinIn,FaTelegramPlane } from "react-icons/fa";
-import FadeInWhenVisible from "../FadeInWhenVisible/FadeInWhenVisible";
-import logo  from "./assets/logo.png";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTelegramPlane,
+} from "react-icons/fa";
+import Visible from "../Visible/Visible";
+import logo from "./assets/logo.png";
 export default function Footer() {
   return (
-    <FadeInWhenVisible direction="up" duration={700} delay={1} className="bg-black">
+    <Visible
+      direction="up"
+      duration={700}
+      delay={1}
+      className="bg-black"
+    >
       <footer className=" text-gray-300 px-6 md:px-16 py-12">
         <div className="grid md:grid-cols-4 gap-12">
           {/* Logo + Text */}
@@ -37,10 +47,18 @@ export default function Footer() {
               <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
                 Top Hotels
               </li>
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">Quick Links</li>
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">Important Links</li>
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">Insights</li>
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">Knowledge Center</li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                Quick Links
+              </li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                Important Links
+              </li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                Insights
+              </li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                Knowledge Center
+              </li>
             </ul>
           </div>
 
@@ -48,11 +66,21 @@ export default function Footer() {
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">Home</li>
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">About Us</li>
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">Services</li>
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">Career</li>
-              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">Contact</li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                Home
+              </li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                About Us
+              </li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                Services
+              </li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                Career
+              </li>
+              <li className=" relative hover:text-coffee dark:hover:text-coffee transition after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 hover:after:w-full after:bg-coffee after:transition-all after:duration-300">
+                Contact
+              </li>
             </ul>
           </div>
 
@@ -95,17 +123,17 @@ export default function Footer() {
               <FaFacebookF className="text-white text-xl hover:text-coffee" />
             </a>
             <a href="#">
-              <FaInstagram className="text-white text-xl hover:text-coffee"/>
+              <FaInstagram className="text-white text-xl hover:text-coffee" />
             </a>
             <a href="#">
-              <FaLinkedinIn className="text-white text-xl hover:text-coffee"/>
+              <FaLinkedinIn className="text-white text-xl hover:text-coffee" />
             </a>
             <a href="#">
-              <FaTelegramPlane className="text-white text-xl hover:text-coffee"/>
+              <FaTelegramPlane className="text-white text-xl hover:text-coffee" />
             </a>
           </div>
         </div>
       </footer>
-    </FadeInWhenVisible>
+    </Visible>
   );
 }

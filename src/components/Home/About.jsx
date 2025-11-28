@@ -5,77 +5,94 @@ import about2 from "./assets/about2.jpg";
 import Home from "./assets/icon-home1.png";
 import { FaSwimmingPool, FaCheckCircle } from "react-icons/fa";
 import { PiLampPendantBold } from "react-icons/pi";
-export default function about() {
+
+export default function About() {
   return (
     <div
-      className="flex justify-between items-center bg-no-repeat bg-right-bottom pt-12 px-20 dark:bg-darkChocolate"
+      className="flex flex-col lg:flex-row justify-between items-center bg-no-repeat bg-right-bottom pt-12 px-6 md:px-12 lg:px-20 gap-12 dark:bg-darkChocolate"
       style={{ backgroundImage: `url(${Home})` }}
     >
+      {/* Left Section */}
       <Visible
         direction="right"
         delay={100}
-        className="flex justify-between items-start flex-col gap-9 max-w-xl"
+        className="flex flex-col gap-6 max-w-full lg:max-w-xl"
       >
-        <div className="flex justify-center items-center gap-8">
-          <img src={before} alt="img" />
-          <div className="text-coffee " style={{ letterSpacing: "10px" }}>
+        {/* Title */}
+        <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
+          <img src={before} alt="img" className="w-8 md:w-10" />
+          <div className="text-coffee text-sm md:text-base tracking-[0.3em]">
             LUXURY HOTELER
           </div>
-          <img src={before} alt="img" />
+          <img src={before} alt="img" className="w-8 md:w-10" />
         </div>
-        <h2 className="text-4xl">
+
+        {/* Heading */}
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
           We Provide Outdoor Activities To All Visitors
         </h2>
-        <div className="text-coffee text-2xl">
+
+        {/* Description */}
+        <div className="text-coffee text-base md:text-xl">
           San Francisco has hills with views, the coast, excellent food & has
           been voted the happiest, healthiest and fittest city in the States
           many times.
         </div>
-        <div className="flex justify-between items-center  ">
-          <div className="flex justify-center items-center gap-7 text-3xl">
-            <FaSwimmingPool className="text-coffee text-5xl " />
-            <div className="w-36 h-max">The Best Swimming</div>
+
+        {/* Icons Section */}
+        <div className="flex flex-col sm:flex-row justify-start gap-6">
+          <div className="flex items-center gap-4 text-xl">
+            <FaSwimmingPool className="text-coffee text-3xl" />
+            <div>The Best Swimming</div>
           </div>
-          <div className="flex justify-center items-center gap-7 text-3xl">
-            <PiLampPendantBold className="text-coffee text-5xl" />
-            <div className="w-36 h-max">The Best Lighting</div>
+          <div className="flex items-center gap-4 text-xl">
+            <PiLampPendantBold className="text-coffee text-3xl" />
+            <div>The Best Lighting</div>
           </div>
         </div>
-        <ul className="flex justify-start items-start flex-col gap-2">
-          <li className="flex justify-center items-center gap-2">
+
+        {/* Features List */}
+        <ul className="flex flex-col gap-2 text-sm md:text-base">
+          <li className="flex items-center gap-2">
             <FaCheckCircle className="text-coffee" />
             <p>
               It is a long fact that a reader will be distracted by the readable
             </p>
           </li>
-          <li className="flex justify-center items-center gap-2">
+          <li className="flex items-center gap-2">
             <FaCheckCircle className="text-coffee" />
             <p>Lorem Ipsum is simply dummy of the printing and industry</p>
           </li>
-          <li className="flex justify-center items-center gap-2">
+          <li className="flex items-center gap-2">
             <FaCheckCircle className="text-coffee" />
             <p>There are many variations of Lorem Ipsum majority</p>
           </li>
         </ul>
-        <button className="p-6 bg-coffee text-white hover:bg-black">DISCOVER MORE</button>
+
+        {/* Button */}
+        <button className="w-max px-6 py-3 bg-coffee text-white hover:bg-black transition-all duration-200">
+          DISCOVER MORE
+        </button>
       </Visible>
+
+      {/* Right Section */}
       <Visible
         direction="left"
         delay={100}
-        className="before:container  before:w-full  before:h-80  before:block before:absolute before:border before:border-so before:border-coffee  before:-translate-x-14  before:translate-y-28 "
+        className="relative flex flex-col items-center"
       >
-        <img
-          src={about1}
-          alt="about"
-          className=" relative"
-          style={{ border: "15px solid #eeeeee" }}
-        />
-        <img
-          src={about2}
-          alt="about"
-          className=" -translate-x-36 -translate-y-36  "
-          style={{ border: "15px solid #eeeeee" }}
-        />
+        <div className="relative">
+          <img
+            src={about1}
+            alt="about"
+            className="w-full max-w-[300px] border-[15px] border-[#eeeeee] relative z-10"
+          />
+          <img
+            src={about2}
+            alt="about"
+            className="absolute top-[-50px] left-[-100px] w-full max-w-[200px] border-[15px] border-[#eeeeee] hidden sm:block"
+          />
+        </div>
       </Visible>
     </div>
   );

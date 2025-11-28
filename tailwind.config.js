@@ -12,7 +12,8 @@ export default {
         chocolate: "#222021",
         darkChocolate: "#171717",
         offWhite: "#f6f2ed",
-        DarkCoffee: "#26221d"
+        DarkCoffee: "#26221d",
+        lightGray: "#f2f3f5"
       },
     },
   },

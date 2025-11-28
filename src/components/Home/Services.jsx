@@ -9,138 +9,83 @@ import { useNavigate } from "react-router-dom";
 
 export default function Services() {
   const navigate = useNavigate();
+
   return (
     <Visible
       direction="up"
       duration={700}
       delay={1}
-      className="bg-offWhite dark:bg-DarkCoffee w-full py-24"
+      className="bg-offWhite dark:bg-DarkCoffee w-full py-16 px-4"
     >
-      <div className="flex justify-center items-center gap-8 ">
-        <img src={before} alt="img" />
-        <div className="text-coffee " style={{ letterSpacing: "10px" }}>
-          Whet We Offer
+      {/* Section Header */}
+      <div className="flex justify-center items-center gap-4 flex-wrap mb-8">
+        <img src={before} alt="img" className="w-6 sm:w-8" />
+        <div className="text-coffee text-sm sm:text-base tracking-[0.3em] uppercase">
+          What We Offer
         </div>
-        <img src={before} alt="img" />
+        <img src={before} alt="img" className="w-6 sm:w-8" />
       </div>
-      <h2 className="text-center text-5xl w-2/6 m-auto py-12">
+
+      <h2 className="text-center text-2xl sm:text-3xl md:text-5xl font-semibold max-w-2xl mx-auto pb-12">
         Book your stay and relax in luxury
       </h2>
-      <div className="flex justify-center items-center gap-12">
-        <Visible
-          direction="up"
-          delay={100}
-          className="w-96 bg-white cursor-pointer dark:bg-darkChocolate"
-          onClick={() => navigate("/rooms")}
-        >
-          <div className=" overflow-hidden h-80 ">
-            <img src={service1} alt="service1" className="hover:scale-125" />
-          </div>
-          <div className="p-5">
-            <div className="border-b-2 pb-4 mb-5">
-              <h3 className="text-3xl">Junior Suite</h3>
-              <p className="text-coffee text-xl">$150/ Night</p>
+
+      {/* Cards Container */}
+      <div className="flex flex-wrap justify-center items-stretch gap-8">
+        {[
+          { title: "Junior Suite", img: service1, price: "$150/ Night" },
+          { title: "Family Suite", img: service2, price: "$250/ Night" },
+          { title: "Business Suite", img: service3, price: "$550/ Night" },
+        ].map((room, index) => (
+          <Visible
+            key={room.title}
+            direction="up"
+            delay={index * 200}
+            className="w-full sm:w-[90%] md:w-[45%] lg:w-[30%] bg-white dark:bg-darkChocolate cursor-pointer shadow hover:shadow-lg transition-all"
+            onClick={() => navigate("/rooms")}
+          >
+            <div className="overflow-hidden h-64 sm:h-80">
+              <img
+                src={room.img}
+                alt={room.title}
+                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+              />
             </div>
-            <div className="flex justify-between items-center">
-              <ul className="flex flex-col gap-4">
-                <li className="flex items-center  gap-2">
-                  <FaRegUserCircle className="text-coffee text-2xl" />
-                  <p>1-2 Persons</p>
-                </li>
-                <li className="flex items-center  gap-2">
-                  <FaBed className="text-coffee text-2xl" />
-                  <p>King Size Bed</p>
-                </li>
-              </ul>
-              <ul className="flex flex-col gap-4">
-                <li className="flex items-center  gap-2">
-                  <PiBathtub className="text-coffee text-2xl none" />
-                  <p>Bathtub</p>
-                </li>
-                <li className="flex items-center  gap-2">
-                  <FaWifi className="text-coffee text-2xl" />
-                  <p>Free Wifi</p>
-                </li>
-              </ul>
+            <div className="p-5">
+              {/* Title & Price */}
+              <div className="border-b-2 pb-4 mb-5">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold">
+                  {room.title}
+                </h3>
+                <p className="text-coffee text-lg">{room.price}</p>
+              </div>
+
+              {/* Room Features */}
+              <div className="flex justify-between items-start text-sm sm:text-base">
+                <ul className="flex flex-col gap-3">
+                  <li className="flex items-center gap-2">
+                    <FaRegUserCircle className="text-coffee text-xl" />
+                    <p>1-2 Persons</p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <FaBed className="text-coffee text-xl" />
+                    <p>King Size Bed</p>
+                  </li>
+                </ul>
+                <ul className="flex flex-col gap-3">
+                  <li className="flex items-center gap-2">
+                    <PiBathtub className="text-coffee text-xl" />
+                    <p>Bathtub</p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <FaWifi className="text-coffee text-xl" />
+                    <p>Free Wifi</p>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </Visible>
-        <Visible
-          direction="up"
-          delay={300}
-          className="w-96 bg-white cursor-pointer dark:bg-darkChocolate"
-          onClick={() => navigate("/rooms")}
-        >
-          <div className=" overflow-hidden h-80 ">
-            <img src={service2} alt="service1" className="hover:scale-125" />
-          </div>
-          <div className="p-5">
-            <div className="border-b-2 pb-4 mb-5">
-              <h3 className="text-3xl">Family Suite</h3>
-              <p className="text-coffee text-xl">$250/ Night</p>
-            </div>
-            <div className="flex justify-between items-center">
-              <ul className="flex flex-col gap-4">
-                <li className="flex items-center  gap-2">
-                  <FaRegUserCircle className="text-coffee text-2xl" />
-                  <p>1-2 Persons</p>
-                </li>
-                <li className="flex items-center  gap-2">
-                  <FaBed className="text-coffee text-2xl" />
-                  <p>King Size Bed</p>
-                </li>
-              </ul>
-              <ul className="flex flex-col gap-4">
-                <li className="flex items-center  gap-2">
-                  <PiBathtub className="text-coffee text-2xl" />
-                  <p>Bathtub</p>
-                </li>
-                <li className="flex items-center  gap-2">
-                  <FaWifi className="text-coffee text-2xl" />
-                  <p>Free Wifi</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </Visible>
-        <Visible
-          direction="up"
-          delay={600}
-          className="w-96 bg-white cursor-pointer dark:bg-darkChocolate"
-          onClick={() => navigate("/rooms")}
-        >
-          <div className=" overflow-hidden h-80 ">
-            <img src={service3} alt="service1" className="hover:scale-125" />
-          </div>
-          <div className="p-5">
-            <div className="border-b-2 pb-4 mb-5">
-              <h3 className="text-3xl">Business Suite</h3>
-              <p className="text-coffee text-xl">$550/ Night</p>
-            </div>
-            <div className="flex justify-between items-center">
-              <ul className="flex flex-col gap-4">
-                <li className="flex items-center  gap-2">
-                  <FaRegUserCircle className="text-coffee text-2xl" />
-                  <p>1-2 Persons</p>
-                </li>
-                <li className="flex items-center  gap-2">
-                  <FaBed className="text-coffee text-2xl" />
-                  <p>King Size Bed</p>
-                </li>
-              </ul>
-              <ul className="flex flex-col gap-4">
-                <li className="flex items-center  gap-2">
-                  <PiBathtub className="text-coffee text-2xl" />
-                  <p>Bathtub</p>
-                </li>
-                <li className="flex items-center  gap-2">
-                  <FaWifi className="text-coffee text-2xl" />
-                  <p>Free Wifi</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </Visible>
+          </Visible>
+        ))}
       </div>
     </Visible>
   );

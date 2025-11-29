@@ -6,7 +6,8 @@ const api = axios.create({
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": "*",
+    "Authorization": Cookies.get("token") ,
   }
 });
 
@@ -50,5 +51,21 @@ const authApi = {
   delete: api.delete,
 };
 
+const roomsApi = {
+  getRooms(params = {}) {
+    // GET /api/room?page=1&limit=10
+    return api.get("/room", { params });
+  },
+  getRoom(roomNumber) {
+    return api.get(`/room/${roomNumber}`);
+  },
+  createRoom(payload) {
+    return api.post("/room/create", payload);
+  },
+  updateRoom(id, payload) {
+    return api.put(`/room/${id}`, payload);
+  },
+};
+
 export default authApi;
-export { api, setAuthTokenFromCookie };
+export { api, setAuthTokenFromCookie, roomsApi };

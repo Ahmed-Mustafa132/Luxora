@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
       }
       try {
         const res = await authApi.get("/user/me");
-        setUser(res?.data || null);
+        setUser(res?.data.data || null);
       } catch (err) {
         setUser(null);
         setToken(null);

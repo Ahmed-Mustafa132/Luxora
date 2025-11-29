@@ -2,22 +2,23 @@ import { useTheme } from "../../context/ThemeContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "./assets/logo-2.png";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaTachometerAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/Auth";
-// Assuming you have a logo image
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { isLogin } = useAuth();
+  const { isLogin, user } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isAdmin = useState(user?.role === "admin"|| false)[1];
   const navlist = [
     { name: "Home", href: "/" },
     { name: "About", href: "about" },
     { name: "Contact", href: "contact" },
     { name: "Services", href: "services" },
+    isAdmin && { name: "Dashboard", href: "/dashboard" },
   ];
 
   const toggleMobileMenu = () => {
@@ -118,6 +119,22 @@ export default function Navbar() {
                 </span>
               </li>
             ))}
+
+            {/* mobile menu: add dashboard item for admin */}
+            {isAdmin && (
+              <li className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+                <span
+                  className="block text-gray-800 hover:text-yellow-300 dark:text-white dark:hover:text-yellow-300 cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/dashboard");
+                    toggleMobileMenu();
+                  }}
+                >
+                  Dashboard
+                </span>
+              </li>
+            )}
           </ul>
         </div>
       </div>

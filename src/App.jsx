@@ -10,7 +10,7 @@ import Rooms from "./pages/RoomsAndSuits/Rooms.jsx";
 import RoomsAndSuits from "./pages/RoomsAndSuits/RoomsAndSuits.jsx";
 import RoomsDetails from "./pages/RoomsAndSuits/roomsDetails.jsx";
 import Login from "./pages/Auth/Login.jsx";
-import Register from "./pages/Auth/register.jsx";
+import Register from "./pages/Auth/Register.jsx";
 import User from "./pages/User.jsx";
 // Dashboard
 import RoomsDashboard from "./pages/Dashboard/Rooms.jsx";

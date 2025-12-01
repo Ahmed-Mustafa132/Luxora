@@ -7,7 +7,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "Authorization": Cookies.get("token") ,
+    "Authorization": Cookies.get("token"),
   }
 });
 
@@ -52,20 +52,16 @@ const authApi = {
 };
 
 const roomsApi = {
-  getRooms(params = {}) {
-    // GET /api/room?page=1&limit=10
-    return api.get("/room", { params });
-  },
-  getRoom(roomNumber) {
-    return api.get(`/room/${roomNumber}`);
-  },
-  createRoom(payload) {
-    return api.post("/room/create", payload);
-  },
-  updateRoom(id, payload) {
-    return api.put(`/room/${id}`, payload);
-  },
+  getRooms(params = {}) { return api.get("/room", { params }); },
+  getRoom(roomNumber) { return api.get(`/room/${roomNumber}`); },
+  createRoom(payload) { return api.post("/room/create", payload); },
+  updateRoom(id, payload) { return api.put(`/room/${id}`, payload); },
+  // mark as deleted (server uses update route) — safe delete without adding new model/route
+  deleteRoom(id) { return api.put(`/room/${id}`, { status: "deleted" }); },
 };
+const bookApi = {
+  createBooking(payload) { return api.post("/book/book", payload); },
+}
 
 export default authApi;
-export { api, setAuthTokenFromCookie, roomsApi };
+export { api, setAuthTokenFromCookie, roomsApi ,bookApi};

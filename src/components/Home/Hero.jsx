@@ -3,16 +3,27 @@ import { FaStar } from "react-icons/fa";
 import banner1 from "./assets/banner1.jpg";
 import banner2 from "./assets/banner2.png";
 import shapeLine1 from "./assets/shape-line1.png";
-import { api } from "../../api/api";
+import { bookApi } from "../../api/api";
 
 export default function Hero() {
-  const form = {
+  const payload = {
     checkIn: "",
     checkOut: "",
     guests: "",
   };
   const check = () => {
-    return "";
+    bookApi
+      .createBooking(payload)
+      .then((res) => {
+        alert("Booking created successfully!");
+      })
+      .catch((err) => {
+        console.error("Error creating booking:", err);
+        alert(
+          err.response?.data?.message ||
+            "Error creating booking. Please try again."
+        );
+      });
   };
   return (
     <>
@@ -75,7 +86,7 @@ export default function Hero() {
           <input
             type="date"
             className="dark:bg-coffee text-fff  px-2 py-1 rounded"
-            onChange={(e) => (form.checkIn = e.target.value)}
+            onChange={(e) => (payload.checkIn = e.target.value)}
           />
         </div>
 
@@ -92,7 +103,7 @@ export default function Hero() {
             type="date"
             className="dark:bg-coffee text-fff px-2 py-1 rounded"
             onChange={(e) => {
-              form.checkOut = e.target.value;
+              payload.checkOut = e.target.value;
             }}
           />
         </div>
@@ -104,11 +115,11 @@ export default function Hero() {
         />
 
         <div className="flex-1 text-center flex flex-col justify-center items-center gap-2">
-          <div className="font-semibold">Guests</div>
+          <div className="font-semibold">guests</div>
           <select
             className="text-coffee px-2 py-1 rounded"
             onChange={(e) => {
-              form.guests = e.target.value;
+              payload.guests = e.target.value;
             }}
           >
             <option value="1">1</option>

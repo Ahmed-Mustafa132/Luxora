@@ -1,7 +1,54 @@
 import Visible from "../../components/Visible/Visible";
-import { Link,  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/Auth";
+import { useState } from "react";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const { register } = useAuth();
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  function handleChange(e) {
+    setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
+    setError("");
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError("");
+    const { name, email, password, confirmPassword } = form;
+    if (!name || !email || !password || !confirmPassword) {
+      setError("Please fill all fields.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const res = await register({ name, email, password });
+      // If your register returns an error shape, handle it:
+      if (res?.error) {
+        setError(res?.message || "Registration failed");
+        setSubmitting(false);
+        return;
+      }
+      // success -> go home (or previous page)
+      navigate("/");
+    } catch (err) {
+      setError(
+        err?.response?.data?.message || err?.message || "Registration failed"
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  }
   return (
     <>
       <Visible direction="right" duration={700} delay={1}>
@@ -12,7 +59,7 @@ export default function Register() {
                 Create Account
               </h2>
 
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit} noValidate>
                 <div>
                   <label
                     htmlFor="name"
@@ -27,7 +74,7 @@ export default function Register() {
                     required
                     className="mt-1 w-full px-4 py-3 rounded-lg bg-lightGray dark:bg-chocolate border border-coffee/30 text-chocolate dark:text-offWhite placeholder-chocolate/70 dark:placeholder-coffee/70 focus:outline-none focus:ring-2 focus:ring-coffee"
                     placeholder="Enter your full name"
-                    onClick={() => {}}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -45,6 +92,7 @@ export default function Register() {
                     required
                     className="mt-1 w-full px-4 py-3 rounded-lg bg-lightGray dark:bg-chocolate border border-coffee/30 text-chocolate dark:text-offWhite placeholder-chocolate/70 dark:placeholder-coffee/70 focus:outline-none focus:ring-2 focus:ring-coffee"
                     placeholder="Enter your email"
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -62,6 +110,7 @@ export default function Register() {
                     required
                     className="mt-1 w-full px-4 py-3 rounded-lg bg-lightGray dark:bg-chocolate border border-coffee/30 text-chocolate dark:text-offWhite placeholder-chocolate/70 dark:placeholder-coffee/70 focus:outline-none focus:ring-2 focus:ring-coffee"
                     placeholder="Create a password"
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -79,14 +128,16 @@ export default function Register() {
                     required
                     className="mt-1 w-full px-4 py-3 rounded-lg bg-lightGray dark:bg-chocolate border border-coffee/30 text-chocolate dark:text-offWhite placeholder-chocolate/70 dark:placeholder-coffee/70 focus:outline-none focus:ring-2 focus:ring-coffee"
                     placeholder="Confirm your password"
+                    onChange={handleChange}
                   />
                 </div>
-
+                {error && <p className="text-sm text-red-500">{error}</p>}
                 <button
                   type="submit"
+                  disabled={submitting}
                   className="w-full py-3 px-4 bg-coffee text-darkChocolate dark:text-offWhite rounded-lg font-medium hover:bg-coffee/90 transition-all duration-200 transform hover:scale-105"
                 >
-                  Register
+                  {submitting ? "Creating account..." : "Create Account"}
                 </button>
               </form>
 

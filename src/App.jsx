@@ -8,11 +8,12 @@ import Home from "./pages/Home/Home.jsx";
 import About from "./pages/About/About.jsx";
 import Contact from "./pages/contact/contact.jsx";
 import Rooms from "./pages/RoomsAndSuits/Rooms.jsx";
-import RoomsAndSuits from "./pages/RoomsAndSuits/RoomsAndSuits.jsx";
+import Services from "./pages/RoomsAndSuits/Services.jsx";
 import RoomsDetails from "./pages/RoomsAndSuits/roomsDetails.jsx";
 import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
 import User from "./pages/User.jsx";
+import Book from "./pages/Book.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 
 // Dashboard
@@ -20,7 +21,7 @@ import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import RoomsDashboard from "./pages/Dashboard/Rooms.jsx";
 import UserDashboard from "./pages/Dashboard/Users.jsx";
 import UserDetails from "./pages/Dashboard/user.jsx";
-
+import BookDashboard from "./pages/Dashboard/Bookings.jsx";
 function Layout() {
   return (
     <>
@@ -41,8 +42,9 @@ const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
       { path: "/rooms", element: <Rooms /> },
-      { path: "/roomsAndSuits", element: <RoomsAndSuits /> },
+      { path: "/Services", element: <Services /> },
       { path: "/roomsDetails", element: <RoomsDetails /> },
+      { path: "/book", element: <Book /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/user/me", element: <User /> },
@@ -50,6 +52,7 @@ const router = createBrowserRouter([
       { path: "/dashboard/rooms", element: <RoomsDashboard /> },
       { path: "/dashboard/users", element: <UserDashboard /> },
       { path: "/dashboard/users/:id", element: <UserDetails /> },
+      { path: "/dashboard/bookings", element: <BookDashboard /> },
       { path: "*", element: <NotFound /> },
       // يمكنك إضافة صفحات أخرى هنا
     ],

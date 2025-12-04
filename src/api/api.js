@@ -61,7 +61,14 @@ const roomsApi = {
 };
 const bookApi = {
   createBooking(payload) { return api.post("/book/book", payload); },
+
+  // admin / site-wide booking endpoints
+  getBookings(params = {}) { return api.get("/book", { params }); },
+  getBooking(id) { return api.get(`/book/${id}`); },
+  updateBooking(id, payload) { return api.put(`/book/${id}`, payload); },
+  cancelBooking(id) { return api.put(`/book/${id}`, { status: "cancelled" }); },
+  deleteBooking(id) { return api.delete(`/book/${id}`); },
 }
 
 export default authApi;
-export { api, setAuthTokenFromCookie, roomsApi ,bookApi};
+export { api, setAuthTokenFromCookie, roomsApi, bookApi };

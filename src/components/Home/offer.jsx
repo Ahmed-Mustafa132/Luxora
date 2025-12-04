@@ -3,6 +3,7 @@ import before from "./assets/before.png";
 import service1 from "./assets/service1.jpg";
 import service2 from "./assets/service2.jpg";
 import service3 from "./assets/service3.jpg";
+import { Link } from "react-router-dom";
 
 export default function Offer() {
   const offers = [
@@ -42,9 +43,9 @@ export default function Offer() {
               />
 
               {/* Label */}
-              <div className="absolute bottom-6 left-6 bg-white dark:bg-darkChocolate px-4 py-2 text-coffee dark:text-white font-semibold transition-all group-hover:bg-coffee group-hover:text-white">
+              <Link to={"/roomsDetails"} className="absolute bottom-6 left-6 bg-white dark:bg-darkChocolate px-4 py-2 text-coffee dark:text-white font-semibold transition-all group-hover:bg-coffee group-hover:text-white">
                 {offer.title}
-              </div>
+              </Link>
             </div>
           </Visible>
         ))}

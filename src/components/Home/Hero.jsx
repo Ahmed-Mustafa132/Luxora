@@ -50,7 +50,7 @@ export default function Hero() {
                 <img
                   src={banner2}
                   alt="Banner 2"
-                  className="hidden md:block absolute w-24 h-24 md:w-40 md:h-40 object-cover -translate-y-1/2 left-0 -translate-x-1/2"
+                  className="hidden md:block absolute w-24 h-24 md:w-40 md:h-40 object-cover -translate-y-20 "
                 />
 
                 {/* Stars */}

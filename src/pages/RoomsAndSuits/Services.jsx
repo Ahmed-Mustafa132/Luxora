@@ -8,7 +8,7 @@ import feature2 from "./assets/feature2.jpg";
 import feature3 from "./assets/feature3.jpg";
 import before from "./assets/before.png";
 
-export default function RoomsAndSuits() {
+export default function Services() {
   return (
     <main>
       {/* Hero Section */}

@@ -1,7 +1,7 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Visible from "../../components/Visible/Visible";
-import { useAuth } from "../../context/Auth"; 
+import { useAuth } from "../../context/Auth";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -37,6 +37,7 @@ export default function Login() {
       }
       // success -> go home (or previous page)
       navigate("/");
+      window.location.reload();
     } catch (err) {
       setError(err?.response?.data?.message || err?.message || "Login failed");
     } finally {
@@ -58,7 +59,10 @@ export default function Login() {
 
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-chocolate dark:text-coffee">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-chocolate dark:text-coffee"
+                >
                   Email
                 </label>
                 <input
@@ -74,7 +78,10 @@ export default function Login() {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-chocolate dark:text-coffee">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-chocolate dark:text-coffee"
+                >
                   Password
                 </label>
                 <input
@@ -91,7 +98,10 @@ export default function Login() {
 
               <div className="flex items-center justify-between text-sm">
                 <label className="flex items-center space-x-2 text-chocolate dark:text-coffee">
-                  <input type="checkbox" className="h-4 w-4 text-coffee rounded" />
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 text-coffee rounded"
+                  />
                   <span>Remember me</span>
                 </label>
                 <Link to="/forgot" className="text-coffee hover:underline">
@@ -112,7 +122,10 @@ export default function Login() {
 
             <p className="mt-6 text-center text-chocolate dark:text-coffee">
               Don't have an account?{" "}
-              <Link to="/register" className="font-medium underline hover:text-coffee dark:hover:text-offWhite">
+              <Link
+                to="/register"
+                className="font-medium underline hover:text-coffee dark:hover:text-offWhite"
+              >
                 Create account
               </Link>
             </p>

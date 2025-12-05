@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/Auth";
-import { roomsApi } from "../../api/api";
+import { useAuth } from "../../../context/Auth";
+import { roomsApi } from "../../../api/api";
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 
 export default function RoomsDashboard() {
@@ -382,7 +382,7 @@ export default function RoomsDashboard() {
                             <>
                               <button
                                 onClick={() =>
-                                  navigate(`/rooms/${room.roomNumber}`)
+                                  navigate(`/dashboard/rooms/${room._id}`)
                                 }
                                 title="View"
                                 className="px-2 py-1 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition"

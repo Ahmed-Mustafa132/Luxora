@@ -33,14 +33,12 @@ export default function Register() {
     setSubmitting(true);
     try {
       const res = await register({ name, email, password });
-      // If your register returns an error shape, handle it:
       if (res?.error) {
         setError(res?.message || "Registration failed");
         setSubmitting(false);
         return;
       }
-      // success -> go home (or previous page)
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       setError(
         err?.response?.data?.message || err?.message || "Registration failed"

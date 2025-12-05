@@ -18,9 +18,10 @@ import NotFound from "./pages/NotFound/NotFound.jsx";
 
 // Dashboard
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
-import RoomsDashboard from "./pages/Dashboard/Rooms.jsx";
-import UserDashboard from "./pages/Dashboard/Users.jsx";
-import UserDetails from "./pages/Dashboard/user.jsx";
+import RoomsDashboard from "./pages/Dashboard/room/Rooms.jsx";
+import RoomDetails from "./pages/Dashboard/room/RoomDetails.jsx";
+import UserDashboard from "./pages/Dashboard/user/Users.jsx";
+import UserDetails from "./pages/Dashboard/user/user.jsx";
 import BookDashboard from "./pages/Dashboard/Bookings.jsx";
 function Layout() {
   return (
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
       { path: "/user/me", element: <User /> },
       { path: "/dashboard", element: <Dashboard /> },
       { path: "/dashboard/rooms", element: <RoomsDashboard /> },
+      { path: "/dashboard/rooms/:id", element: <RoomDetails /> },
       { path: "/dashboard/users", element: <UserDashboard /> },
       { path: "/dashboard/users/:id", element: <UserDetails /> },
       { path: "/dashboard/bookings", element: <BookDashboard /> },

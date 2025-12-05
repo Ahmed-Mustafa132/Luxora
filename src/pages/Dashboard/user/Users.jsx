@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../context/Auth";
-import { api } from "../../api/api";
+import { useAuth } from "../../../context/Auth";
+import { api } from "../../../api/api";
 import { Link, useNavigate } from "react-router-dom";
-import { FaTrash, FaUserShield, FaUserAlt, FaSearch } from "react-icons/fa";
+import { FaTrash, FaUserAlt, FaSearch } from "react-icons/fa";
 
 export default function UsersAdminPage() {
   const { user, isLogin } = useAuth();
@@ -48,17 +48,6 @@ export default function UsersAdminPage() {
     }
   }
 
-  async function toggleAdmin(u) {
-    const makeAdmin = !(u.role === "admin" || u.isAdmin);
-    if (!confirm(`${makeAdmin ? "Promote" : "Demote"} ${u.email}?`)) return;
-    try {
-      await api.put(`/user/${u._id}`, { role: makeAdmin ? "admin" : "user" });
-      await load();
-    } catch (e) {
-      console.error(e);
-      alert("Failed to update role.");
-    }
-  }
 
   async function removeUser(u) {
     if (!confirm(`Delete user ${u.email}? This cannot be undone.`)) return;
@@ -132,7 +121,6 @@ export default function UsersAdminPage() {
                     <th className="p-2">Name</th>
                     <th className="p-2">Email</th>
                     <th className="p-2">Role</th>
-                    <th className="p-2">Joined</th>
                     <th className="p-2 text-right">Actions</th>
                   </tr>
                 </thead>
@@ -143,11 +131,9 @@ export default function UsersAdminPage() {
                       <td className="p-2">{u.name || <span className="text-gray-400">—</span>}</td>
                       <td className="p-2">{u.email}</td>
                       <td className="p-2">{u.role || (u.isAdmin ? "admin" : "user")}</td>
-                      <td className="p-2">{u.createdAt ? new Date(u.createdAt).toLocaleDateString() : "—"}</td>
                       <td className="p-2 text-right">
                         <div className="inline-flex gap-2">
                           <button title="View profile" onClick={() => navigate(`/dashboard/users/${u._id}`)} className="px-2 py-1 border rounded text-sm"><FaUserAlt /></button>
-                          <button title={u.role === "admin" ? "Demote" : "Promote to admin"} onClick={() => toggleAdmin(u)} className="px-2 py-1 border rounded text-sm"><FaUserShield /></button>
                           <button title="Delete" onClick={() => removeUser(u)} className="px-2 py-1 bg-red-600 text-white rounded text-sm"><FaTrash /></button>
                         </div>
                       </td>

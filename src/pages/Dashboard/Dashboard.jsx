@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/Auth";
-import { roomsApi, api, bookApi } from "../../api/api";
+import { roomsApi, api, authApi } from "../../api/api";
 import Visible from "../../components/Visible/Visible";
 import {
   FaChartBar,
@@ -30,40 +30,18 @@ export default function Dashboard() {
     async function loadStats() {
       setLoading(true);
       try {
-        const [roomsRes, usersRes, bookingsRes] = await Promise.allSettled([
-          roomsApi.getRooms({ page: 1, limit: 1 }),
-          api.get("/user"),
-          bookApi?.getBookings?.() ?? api.get("/booking"),
-        ]);
-
-        let totalRooms = 0;
-        if (roomsRes.status === "fulfilled") {
-          totalRooms = roomsRes.value?.data?.totalRooms ?? 0;
-        }
-
-        let totalUsers = 0;
-        if (usersRes.status === "fulfilled") {
-          totalUsers =
-            usersRes.value?.data?.totalUsers ??
-            (Array.isArray(usersRes.value?.data)
-              ? usersRes.value.data.length
-              : 0);
-        }
-
-        let bookingsCount = 0;
-        if (bookingsRes.status === "fulfilled") {
-          bookingsCount =
-            bookingsRes.value?.data?.total ??
-            (Array.isArray(bookingsRes.value?.data)
-              ? bookingsRes.value.data.length
-              : 0);
-        }
-
-        setStats({
-          rooms: totalRooms,
-          users: totalUsers,
-          bookings: bookingsCount,
-        });
+        const res = await authApi
+          .dashboard()
+          .then((res) => {
+            setStats({
+              rooms: res.data.rooms,
+              users: res.data.users,
+              bookings: res.data.bookings,
+            });
+          })
+          .catch((e) => {
+            return null;
+          });
       } catch (err) {
         console.error("Dashboard stats load failed", err);
       } finally {
@@ -255,14 +233,6 @@ export default function Dashboard() {
                     className="flex items-center text-amber-600 dark:text-amber-500 hover:text-amber-700 dark:hover:text-amber-400 font-medium transition"
                   >
                     <span className="mr-2">📅</span> Manage Bookings
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/dashboard/settings"
-                    className="flex items-center text-amber-600 dark:text-amber-500 hover:text-amber-700 dark:hover:text-amber-400 font-medium transition"
-                  >
-                    <FaCog className="mr-2" /> Site Settings
                   </Link>
                 </li>
               </ul>

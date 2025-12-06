@@ -14,7 +14,7 @@ export default function Book() {
     guests: 1,
   });
   const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState(null); // { type, text }
+  const [status, setStatus] = useState(null); 
   const [booking, setBooking] = useState(null);
 
   function handleChange(e) {

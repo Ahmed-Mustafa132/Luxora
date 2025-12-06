@@ -25,7 +25,6 @@ export default function Login() {
       setError("Please enter email and password.");
       return;
     }
-
     setSubmitting(true);
     try {
       const res = await login({ email, password });
@@ -39,6 +38,7 @@ export default function Login() {
       navigate("/");
       window.location.reload();
     } catch (err) {
+      console.log(error)
       setError(err?.response?.data?.message || err?.message || "Login failed");
     } finally {
       setSubmitting(false);

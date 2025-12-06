@@ -22,7 +22,8 @@ import RoomsDashboard from "./pages/Dashboard/room/Rooms.jsx";
 import RoomDetails from "./pages/Dashboard/room/RoomDetails.jsx";
 import UserDashboard from "./pages/Dashboard/user/Users.jsx";
 import UserDetails from "./pages/Dashboard/user/user.jsx";
-import BookDashboard from "./pages/Dashboard/Bookings.jsx";
+import BookDashboard from "./pages/Dashboard/book/Bookings.jsx";
+import Bookinfo from "./pages/Dashboard/book/BookInfo.jsx";
 function Layout() {
   return (
     <>
@@ -55,8 +56,8 @@ const router = createBrowserRouter([
       { path: "/dashboard/users", element: <UserDashboard /> },
       { path: "/dashboard/users/:id", element: <UserDetails /> },
       { path: "/dashboard/bookings", element: <BookDashboard /> },
+      { path: "/dashboard/bookings/:id", element: <Bookinfo /> },
       { path: "*", element: <NotFound /> },
-      // يمكنك إضافة صفحات أخرى هنا
     ],
   },
 ]);

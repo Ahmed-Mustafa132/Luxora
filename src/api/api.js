@@ -6,15 +6,13 @@ const api = axios.create({
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
-    "Authorization": Cookies.get("token"),
+    Authorization: Cookies.get("token") || ""
   }
 });
 
 function setAuthTokenFromCookie() {
   const token = Cookies.get("token");
-  if (token) {
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  } else { delete api.defaults.headers.common["Authorization"]; }
+  if (token) api.defaults.headers.common.Authorization = token;
 }
 setAuthTokenFromCookie();
 
@@ -38,7 +36,16 @@ const authApi = {
     }
     return res.data;
   },
+  async dashboard() {
+    try {
 
+      const res = await api.get("/user/dashboard");
+      return res.data;
+    } catch (e) {
+      console.error("Failed to load dashboard data", e);
+      return null;
+    }
+  },
   async logout() {
     Cookies.remove("token");
     delete api.defaults.headers.common["Authorization"];
@@ -55,19 +62,26 @@ const roomsApi = {
   getRoom(roomNumber) { return api.get(`/room/${roomNumber}`); },
   createRoom(payload) { return api.post("/room/create", payload); },
   updateRoom(id, payload) { return api.put(`/room/${id}`, payload); },
-  // mark as deleted (server uses update route) — safe delete without adding new model/route
   deleteRoom(id) { return api.put(`/room/${id}`, { status: "deleted" }); },
 };
 const bookApi = {
-  createBooking(payload) { return api.post("/book/book", payload); },
-
-  // admin / site-wide booking endpoints
-  getBookings(params = {}) { return api.get("/book", { params }); },
-  getBooking(id) { return api.get(`/book/${id}`); },
+  createBooking(payload) { return api.post("/book/book", payload); }, // POST /api/book/book
+  getBookings(params = {}) { return api.get("/book", { params }); },   // GET /api/book
+  getBooking(id) { return api.get(`/book/${id}`); },                   // GET /api/book/:id
   updateBooking(id, payload) { return api.put(`/book/${id}`, payload); },
-  cancelBooking(id) { return api.put(`/book/${id}`, { status: "cancelled" }); },
-  deleteBooking(id) { return api.delete(`/book/${id}`); },
-}
+  cancelBooking(id) { return api.put(`/book/${id}/cancel`); },
+  deleteBooking(id) { return api.delete(`/book/${id}`); }
+};
 
-export default authApi;
-export { api, setAuthTokenFromCookie, roomsApi, bookApi };
+api.authApi = authApi;
+api.roomsApi = roomsApi;
+api.bookApi = bookApi;
+
+
+api.login = authApi.login;
+api.register = authApi.register;
+api.dashboard = authApi.dashboard;
+api.logout = authApi.logout;
+
+export default api;
+export { api, setAuthTokenFromCookie, authApi, roomsApi, bookApi };

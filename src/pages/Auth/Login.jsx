@@ -28,13 +28,11 @@ export default function Login() {
     setSubmitting(true);
     try {
       const res = await login({ email, password });
-      // If your login returns an error shape, handle it:
       if (res?.error || res?.message === "Invalid credentials") {
         setError(res?.message || "Login failed");
         setSubmitting(false);
         return;
       }
-      // success -> go home (or previous page)
       navigate("/");
       window.location.reload();
     } catch (err) {

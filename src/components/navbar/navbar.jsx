@@ -12,14 +12,14 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isAdmin = useState(user?.role === "admin"|| false)[1];
+  const isAdmin = user?.role === "admin";
   const navlist = [
     { name: "Home", href: "/" },
     { name: "About", href: "about" },
     { name: "Contact", href: "contact" },
     { name: "Services", href: "services" },
     isAdmin && { name: "Dashboard", href: "/dashboard" },
-  ];
+  ].filter(Boolean);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -119,22 +119,6 @@ export default function Navbar() {
                 </span>
               </li>
             ))}
-
-            {/* mobile menu: add dashboard item for admin */}
-            {isAdmin && (
-              <li className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
-                <span
-                  className="block text-gray-800 hover:text-yellow-300 dark:text-white dark:hover:text-yellow-300 cursor-pointer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate("/dashboard");
-                    toggleMobileMenu();
-                  }}
-                >
-                  Dashboard
-                </span>
-              </li>
-            )}
           </ul>
         </div>
       </div>

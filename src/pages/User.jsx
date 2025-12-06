@@ -4,7 +4,7 @@ import { api, bookApi } from "../api/api";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UserDashboard() {
-  const { user, isLogin, updateUser } = useAuth();
+  const { user, isLogin, updateUser, logout } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [bookings, setBookings] = useState([]);
@@ -32,25 +32,13 @@ export default function UserDashboard() {
       return;
     }
     loadBookings();
-    // eslint-disable-next-line
   }, [isLogin]);
 
   async function loadBookings() {
     setLoading(true);
     setError(null);
     try {
-      // try bookApi helper then fallback to common endpoints
-      let res;
-      if (bookApi && typeof bookApi.getMyBookings === "function") {
-        res = await bookApi.getMyBookings();
-      } else {
-        // common patterns: /booking/my or /booking?userId=me
-        try {
-          res = await api.get("/booking/my");
-        } catch (e) {
-          res = await api.get("/booking"); // server may return user's bookings when authenticated
-        }
-      }
+      const res = await api.get("/book/my");
       const data = res?.data?.data ?? res?.data ?? [];
       setBookings(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -71,7 +59,6 @@ export default function UserDashboard() {
   async function cancelBooking(booking) {
     if (!confirm(`Cancel booking ${booking._id || booking.id}?`)) return;
     try {
-      // try bookApi helper then fallback
       if (bookApi && typeof bookApi.cancelBooking === "function") {
         await bookApi.cancelBooking(booking._id || booking.id);
       } else {
@@ -89,7 +76,6 @@ export default function UserDashboard() {
     setSavingProfile(true);
     try {
       const res = await api.put("/user/me", profile);
-      // server should return updated user
       const updated = res?.data?.user ?? res?.data ?? profile;
       if (updateUser) updateUser(updated);
       setEditing(false);
@@ -101,15 +87,29 @@ export default function UserDashboard() {
     }
   }
 
+  function handleLogout() {
+    if (logout) logout();
+    navigate("/");
+  }
+
   if (!isLogin) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6">
         <div className="max-w-xl w-full bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center">
           <h2 className="text-2xl font-bold mb-2">Sign in required</h2>
-          <p className="text-sm text-gray-500 mb-4">Please sign in to view your dashboard and booking history.</p>
+          <p className="text-sm text-gray-500 mb-4">
+            Please sign in to view your dashboard and booking history.
+          </p>
           <div className="flex justify-center gap-3">
-            <button onClick={() => navigate("/login")} className="px-4 py-2 bg-coffee text-white rounded">Sign in</button>
-            <Link to="/" className="px-4 py-2 border rounded">Home</Link>
+            <button
+              onClick={() => navigate("/login")}
+              className="px-4 py-2 bg-coffee text-white rounded"
+            >
+              Sign in
+            </button>
+            <Link to="/" className="px-4 py-2 border rounded">
+              Home
+            </Link>
           </div>
         </div>
       </div>
@@ -124,33 +124,98 @@ export default function UserDashboard() {
           <div className="flex items-center gap-6">
             <div>
               <img
-                src={user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.email || "User")}&background=0D8ABC&color=fff`}
+                src={
+                  user?.avatar ||
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                    user?.name || user?.email || "User"
+                  )}&background=0D8ABC&color=fff`
+                }
                 alt="avatar"
                 className="w-20 h-20 rounded-full object-cover border"
               />
             </div>
             <div className="flex-1">
-              <h2 className="text-xl font-bold text-gray-800 dark:text-white">{user?.name || user?.email}</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-300">{user?.email}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-300">Member since: {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : "—"}</p>
+              <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+                {user?.name || user?.email}
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-300">
+                {user?.email}
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-300">
+                Member since:{" "}
+                {user?.createdAt
+                  ? new Date(user.createdAt).toLocaleDateString()
+                  : "—"}
+              </p>
             </div>
 
             <div className="space-y-2">
-              <button onClick={() => setEditing((s) => !s)} className="px-3 py-2 border rounded">
+              <button
+                onClick={() => setEditing((s) => !s)}
+                className="px-3 py-2 border rounded"
+              >
                 {editing ? "Cancel" : "Edit profile"}
               </button>
-              <button onClick={() => navigate("/bookings/new")} className="px-3 py-2 bg-coffee text-white rounded">New Booking</button>
+              <button
+                onClick={handleLogout}
+                className="px-3 py-2 border rounded text-red-600"
+              >
+                Logout
+              </button>
+              <button
+                onClick={() => navigate("/book")}
+                className="px-3 py-2 bg-coffee text-white rounded"
+              >
+                New Booking
+              </button>
             </div>
           </div>
 
           {editing && (
-            <form onSubmit={saveProfile} className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
-              <input name="name" value={profile.name} onChange={(e)=> setProfile({...profile, name: e.target.value})} className="p-2 border rounded" placeholder="Name" />
-              <input name="email" value={profile.email} onChange={(e)=> setProfile({...profile, email: e.target.value})} className="p-2 border rounded" placeholder="Email" />
-              <input name="phone" value={profile.phone} onChange={(e)=> setProfile({...profile, phone: e.target.value})} className="p-2 border rounded" placeholder="Phone" />
+            <form
+              onSubmit={saveProfile}
+              className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3"
+            >
+              <input
+                name="name"
+                value={profile.name}
+                onChange={(e) =>
+                  setProfile({ ...profile, name: e.target.value })
+                }
+                className="p-2 border rounded"
+                placeholder="Name"
+              />
+              <input
+                name="email"
+                value={profile.email}
+                disabled
+                className="p-2 border rounded bg-gray-100 dark:bg-gray-700"
+                placeholder="Email"
+              />
+              <input
+                name="phone"
+                value={profile.phone}
+                onChange={(e) =>
+                  setProfile({ ...profile, phone: e.target.value })
+                }
+                className="p-2 border rounded"
+                placeholder="Phone"
+              />
               <div className="md:col-span-3 flex justify-end gap-2">
-                <button type="submit" disabled={savingProfile} className="px-4 py-2 bg-coffee text-white rounded">{savingProfile ? "Saving..." : "Save"}</button>
-                <button type="button" onClick={() => setEditing(false)} className="px-4 py-2 border rounded">Close</button>
+                <button
+                  type="submit"
+                  disabled={savingProfile}
+                  className="px-4 py-2 bg-coffee text-white rounded"
+                >
+                  {savingProfile ? "Saving..." : "Save"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEditing(false)}
+                  className="px-4 py-2 border rounded"
+                >
+                  Close
+                </button>
               </div>
             </form>
           )}
@@ -158,13 +223,21 @@ export default function UserDashboard() {
 
         {/* Booking history */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">Booking History</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">
+            Booking History
+          </h3>
           {loading ? (
             <div>Loading bookings...</div>
           ) : error ? (
             <div className="text-red-600">{error}</div>
           ) : bookings.length === 0 ? (
-            <div className="text-sm text-gray-500">No bookings found. <Link to="/rooms" className="text-coffee">Book a room</Link>.</div>
+            <div className="text-sm text-gray-500">
+              No bookings found.{" "}
+              <Link to="/rooms" className="text-coffee">
+                Book a room
+              </Link>
+              .
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -176,22 +249,36 @@ export default function UserDashboard() {
                     <th className="p-2">Check-out</th>
                     <th className="p-2">Price</th>
                     <th className="p-2">Status</th>
-                    <th className="p-2 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {bookings.map((b, i) => (
                     <tr key={b._id || b.id} className="border-t">
                       <td className="p-2">{i + 1}</td>
-                      <td className="p-2">{b.roomNumber || b.room?.roomNumber || b.room?.name || "—"}</td>
-                      <td className="p-2">{formatDate(b.checkIn || b.startDate)}</td>
-                      <td className="p-2">{formatDate(b.checkOut || b.endDate)}</td>
+                      <td className="p-2">
+                        {b.roomNumber ||
+                          b.room?.roomNumber ||
+                          b.room?.name ||
+                          "—"}
+                      </td>
+                      <td className="p-2">
+                        {formatDate(b.checkIn || b.startDate)}
+                      </td>
+                      <td className="p-2">
+                        {formatDate(b.checkOut || b.endDate)}
+                      </td>
                       <td className="p-2">${b.total || b.price || "—"}</td>
                       <td className="p-2">{b.status || "—"}</td>
                       <td className="p-2 text-right">
-                        <button onClick={() => navigate(`/bookings/${b._id || b.id}`)} className="px-2 py-1 mr-2 border rounded text-sm">View</button>
-                        {(b.status === "confirmed" || b.status === "pending") && (
-                          <button onClick={() => cancelBooking(b)} className="px-2 py-1 bg-red-600 text-white rounded text-sm">Cancel</button>
+                     
+                        {(b.status === "confirmed" ||
+                          b.status === "pending") && (
+                          <button
+                            onClick={() => cancelBooking(b)}
+                            className="px-2 py-1 bg-red-600 text-white rounded text-sm"
+                          >
+                            Cancel
+                          </button>
                         )}
                       </td>
                     </tr>
@@ -204,20 +291,22 @@ export default function UserDashboard() {
 
         {/* More: quick links */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col md:flex-row gap-4">
-          <div className="flex-1">
-            <h4 className="font-semibold text-gray-800 dark:text-white">Account & Settings</h4>
-            <p className="text-sm text-gray-500">Manage your account details, change password or update payment methods.</p>
-            <div className="mt-3 flex gap-2">
-              <Link to="/user/me" className="px-3 py-2 border rounded">Account details</Link>
-              <Link to="/user/password" className="px-3 py-2 border rounded">Change password</Link>
-            </div>
-          </div>
+          
 
           <div className="w-full md:w-1/3">
-            <h4 className="font-semibold text-gray-800 dark:text-white">Need help?</h4>
-            <p className="text-sm text-gray-500">Contact support for booking changes or special requests.</p>
+            <h4 className="font-semibold text-gray-800 dark:text-white">
+              Need help?
+            </h4>
+            <p className="text-sm text-gray-500">
+              Contact support for booking changes or special requests.
+            </p>
             <div className="mt-3">
-              <a href="mailto:info@luxora.example" className="px-3 py-2 bg-coffee text-white rounded inline-block">Contact support</a>
+              <a
+                href="mailto:info@luxora.example"
+                className="px-3 py-2 bg-coffee text-white rounded inline-block"
+              >
+                Contact support
+              </a>
             </div>
           </div>
         </div>

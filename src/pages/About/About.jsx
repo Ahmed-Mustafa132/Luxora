@@ -48,10 +48,8 @@ export default function About() {
         let bookingsCount = hotel.stats.bookings;
         try {
           const b = await api.get("/booking");
-          // server may return { total } or array
           bookingsCount = b?.data?.total ?? (Array.isArray(b?.data) ? b.data.length : bookingsCount);
         } catch (e) {
-          // ignore if endpoint missing
         }
 
         if (mounted) setStats({ rooms: totalRooms, bookings: bookingsCount, staff: stats.staff });
@@ -63,10 +61,8 @@ export default function About() {
     }
     loadStats();
     return () => { mounted = false; };
-    // eslint-disable-next-line
   }, []);
 
-  // simple auto-play carousel
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setCurrent((c) => (c + 1) % hotel.gallery.length);

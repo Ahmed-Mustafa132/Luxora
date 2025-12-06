@@ -10,7 +10,7 @@ export default function Contact() {
     message: "",
   });
   const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState(null); // { type: 'success'|'error', text: string }
+  const [status, setStatus] = useState(null);  
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -27,7 +27,6 @@ export default function Contact() {
     setSubmitting(true);
     setStatus(null);
     try {
-      // expects server route POST /api/contact
       await api.post("/contact", form);
       setStatus({ type: "success", text: "Message sent. We will contact you soon." });
       setForm({ name: "", email: "", phone: "", message: "" });

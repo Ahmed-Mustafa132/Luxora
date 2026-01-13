@@ -93,11 +93,15 @@ export default function Book() {
             className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 grid grid-cols-1 sm:grid-cols-3 gap-4"
           >
             <div className="sm:col-span-1">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
+              <label
+                htmlFor="checkIn"
+                className="text-sm text-gray-600 dark:text-gray-300"
+              >
                 Check-in
               </label>
               <input
                 type="date"
+                id="checkIn"
                 name="checkIn"
                 value={form.checkIn}
                 onChange={handleChange}
@@ -107,11 +111,15 @@ export default function Book() {
             </div>
 
             <div className="sm:col-span-1">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
+              <label
+                htmlFor="checkOut"
+                className="text-sm text-gray-600 dark:text-gray-300"
+              >
                 Check-out
               </label>
               <input
                 type="date"
+                id="checkOut"
                 name="checkOut"
                 value={form.checkOut}
                 onChange={handleChange}
@@ -121,10 +129,14 @@ export default function Book() {
             </div>
 
             <div className="sm:col-span-1">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
+              <label
+                htmlFor="guests"
+                className="text-sm text-gray-600 dark:text-gray-300"
+              >
                 Guests
               </label>
               <select
+                id="guests"
                 name="guests"
                 value={form.guests}
                 onChange={handleChange}

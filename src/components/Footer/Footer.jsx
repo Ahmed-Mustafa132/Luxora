@@ -8,12 +8,7 @@ import Visible from "../Visible/Visible";
 import logo from "./assets/logo.png";
 export default function Footer() {
   return (
-    <Visible
-      direction="up"
-      duration={700}
-      delay={1}
-      className="bg-black"
-    >
+    <Visible direction="up" duration={700} delay={1} className="bg-black">
       <footer className=" text-gray-300 px-6 md:px-16 py-12">
         <div className="grid md:grid-cols-4 gap-12">
           {/* Logo + Text */}
@@ -26,12 +21,21 @@ export default function Footer() {
               chat.
             </p>
             <div className="flex bg-[#1e1a16] p-2">
+              <label htmlFor="email-subscription" className="sr-only">
+                Email Address
+              </label>
               <input
+                id="email-subscription"
                 type="email"
                 placeholder="Email Address"
                 className="bg-transparent outline-none text-sm px-2 w-full placeholder-gray-400"
               />
-              <button className="text-coffee">
+              <button
+                className="text-coffee"
+                id="send"
+                name="send"
+                aria-label="Subscribe to newsletter"
+              >
                 <FaTelegramPlane className="text-2xl" />
               </button>
             </div>
@@ -119,16 +123,16 @@ export default function Footer() {
         <div className="mt-10 flex items-center gap-4 text-white text-lg">
           <span className="font-bold text-white text-xl">Follow Us</span>
           <div className="flex gap-4 mt-2">
-            <a href="#">
+            <a href="#" aria-label="Follow us on Facebook">
               <FaFacebookF className="text-white text-xl hover:text-coffee" />
             </a>
-            <a href="#">
+            <a href="#" aria-label="Follow us on Instagram">
               <FaInstagram className="text-white text-xl hover:text-coffee" />
             </a>
-            <a href="#">
+            <a href="#" aria-label="Follow us on LinkedIn">
               <FaLinkedinIn className="text-white text-xl hover:text-coffee" />
             </a>
-            <a href="#">
+            <a href="#" aria-label="Follow us on Telegram">
               <FaTelegramPlane className="text-white text-xl hover:text-coffee" />
             </a>
           </div>

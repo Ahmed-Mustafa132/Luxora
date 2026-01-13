@@ -82,8 +82,11 @@ export default function Hero() {
       >
         {/* Check In */}
         <div className="flex-1 text-center flex flex-col justify-center items-center gap-2">
-          <div className="font-semibold">Check In</div>
+          <label htmlFor="hero-checkIn" className="font-semibold">
+            Check In
+          </label>
           <input
+            id="hero-checkIn"
             type="date"
             className="dark:bg-coffee text-fff  px-2 py-1 rounded"
             onChange={(e) => (payload.checkIn = e.target.value)}
@@ -98,8 +101,11 @@ export default function Hero() {
         />
 
         <div className="flex-1 text-center flex flex-col justify-center items-center gap-2">
-          <div className="font-semibold">Check Out</div>
+          <label htmlFor="hero-checkOut" className="font-semibold">
+            Check Out
+          </label>
           <input
+            id="hero-checkOut"
             type="date"
             className="dark:bg-coffee text-fff px-2 py-1 rounded"
             onChange={(e) => {
@@ -115,8 +121,11 @@ export default function Hero() {
         />
 
         <div className="flex-1 text-center flex flex-col justify-center items-center gap-2">
-          <div className="font-semibold">guests</div>
+          <label htmlFor="hero-guests" className="font-semibold">
+            guests
+          </label>
           <select
+            id="hero-guests"
             className="text-coffee px-2 py-1 rounded"
             onChange={(e) => {
               payload.guests = e.target.value;
